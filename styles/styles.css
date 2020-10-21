@@ -1,3 +1,102 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 /* font-family: 'Press Start 2P', cursive; */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+:root {
+    font-size: 10px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Press Start 2P';
+    background-color: rgb(143, 150, 149);
+    color: #fff;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.timer__heading {
+    font-size: 7rem;
+    user-select: none;
+}
+
+.inputsWrapper {
+    display: flex;
+}
+
+.timer-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-input__input {
+    /* display: block; */
+    width: 19rem;
+    height: 19rem;
+    text-align: center;
+    font-size: 5rem;
+    background-color: rgb(143, 150, 149);
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.timer-input__input::-webkit-outer-spin-button,
+.timer-input__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.timer-input__label {
+    margin: 1.8rem 0 5rem 0;
+    font-size: 2.4rem;
+}
+
+.button {
+    width: 7rem;
+    height: 7rem;
+    border: none;
+    background-color: transparent;
+  
+}
+
+.button__edit {
+    background-image: url('/assets/done.svg');
+}
+
+.button__stop {
+    background-image: url('/assets/play.svg');
+}
+
+.button__refresh {
+    background-image: url('/assets/refresh.svg');
+}
+
+.button__alarm {
+    background-image: url('/assets/alarm.svg');
+    background-size: 100%;
+}
+
+/* .button__alarm--is-active {
+    visibility: hidden;
+} */
