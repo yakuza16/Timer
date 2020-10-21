@@ -7,9 +7,34 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    
+<div class="wrapper">
+<div class="timer">
+<h1 class="timer__heading">TIMER</h1>
+<form class="inputsWrapper">
+
+    <div class="timer-input">
+        <input id="hours" class="timer-input__input" type="number" placeholder="00">
+        <label class="timer-input__label" for="hours">hours</label>
+        <button class="button button--is-edit"></button>
+    </div>
+
+    <div class="timer-input">
+        <input id="minutes" class="timer-input__input" type="number" placeholder="00">
+        <label class="timer-input__label" for="minutes">minutes</label>
+        <button class="button button--is-stop"></button>
+    </div>
+
+    <div class="timer-input">
+        <input id="seconds" class="timer-input__input" type="number" placeholder="00">
+        <label class="timer-input__label" for="seconds">seconds</label>
+        <button class="button"></button>
+    </div>
+</form>
+<button class="button button--is-alarm"></button>
+</div>
 
 
+</div>
     <!-- Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
     <script src="./scripts/index.js" type="module"></script>
 </body>
