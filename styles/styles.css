@@ -18,7 +18,7 @@ body {
     height: 100vh;
     font-family: 'Press Start 2P';
     background-color: rgb(143, 150, 149);
-    color: #fff;
+    color: rgb(0, 0, 0);
 }
 
 .wrapper {
@@ -58,8 +58,8 @@ body {
     text-align: center;
     font-size: 5rem;
     background-color: rgb(143, 150, 149);
-    border: 2px solid #fff;
-    color: #fff;
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
 
 .timer-input__input::-webkit-outer-spin-button,
@@ -77,11 +77,12 @@ body {
     height: 7rem;
     border: none;
     background-color: transparent;
-  
+    cursor: pointer;
 }
 
 .button__edit {
     background-image: url('/assets/done.svg');
+fill: white;
 }
 
 .button__stop {
@@ -92,11 +93,12 @@ body {
     background-image: url('/assets/refresh.svg');
 }
 
-.button__alarm {
-    background-image: url('/assets/alarm.svg');
-    background-size: 100%;
+
+.button__alarm-icon {
+    fill: rgb(135, 231, 135);
 }
 
 /* .button__alarm--is-active {
     visibility: hidden;
+    cursor: initial;
 } */
