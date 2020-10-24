@@ -110,10 +110,21 @@ body {
 
 
 .button__alarm-icon {
-    fill: rgb(135, 231, 135);
+    fill: rgb(170, 17, 17);
+    animation: alarm .2s infinite;
 }
 
-/* .button__alarm--is-active {
+.button__alarm-icon:hover {
+    fill: rgb(17, 170, 88);
+    animation: paused;
+}
+
+.button__alarm--is-active {
     visibility: hidden;
     cursor: initial;
-} */
+}
+
+@keyframes alarm {
+    0% {transform: translateX(-2px);}
+    100% {transform: translateX(2px);}
+}

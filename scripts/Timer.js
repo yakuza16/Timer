@@ -27,6 +27,7 @@ this.optionEdit = null;
 this.optionPlay = null;
 this.optionRefresh = null;
 this.alarm = null;
+this.alarmSound = new Audio('/assets/clockRing.mp3')
 
 this.choosenHours = null;
 this.choosenMinutes = null;
@@ -53,7 +54,8 @@ bindToElements(){
 addListeners(){
 this.optionEdit.addEventListener('click',()=> this.setTimer());
 this.optionPlay.addEventListener('click', ()=>this.startTimer());
-this.optionRefresh.addEventListener('click', ()=>this.refreshTimer())
+this.optionRefresh.addEventListener('click', ()=>this.refreshTimer());
+this.alarm.addEventListener('click', ()=>this.restartTimer());
 }
 
 setTimer(){
@@ -64,6 +66,7 @@ setTimer(){
         this.optionPlay.removeAttribute('disabled')
     } else if(isEditable === true){
         isTimerOn = false;
+        clearInterval(interval);
         this.optionPlay.classList.remove('button--is-stop');
         this.optionPlay.setAttribute('disabled', true)
     }
@@ -81,31 +84,49 @@ startTimer(){
 }
 
 count(){
-    const indexInterval = setInterval(()=>{
+    interval = setInterval(()=>{
     this.displaySeconds.value --;
     this.displaySeconds.value < 10
     ? this.displaySeconds.value = `0${this.displaySeconds.value}`
     : this.displaySeconds.value;
 
     if(this.displaySeconds.value <= 0){
-        this.displayMinutes.value --;
-        this.displayMinutes.value < 10
-        ? this.displayMinutes.value = `0${this.displayMinutes.value}`
-        :
-        this.displayMinutes.value;
-        this.displaySeconds.value = MAX_SECONDS_VALUE;
+        if(this.displayMinutes.value > 0){
+            this.displayMinutes.value --;
+            this.displayMinutes.value < 10
+            ? this.displayMinutes.value = `0${this.displayMinutes.value}`
+            :
+            this.displayMinutes.value;
+            this.displaySeconds.value = MAX_SECONDS_VALUE;
+        } else {
+            this.displaySeconds.value = '00';
+            clearInterval(interval);
+            this.ringAlarm();
+        }
     }
 
     if(this.displayMinutes.value <= 0){
-        this.displayHours.value --;
-        this.displayHours.value < 10
-        ? this.displayHours.value = `0${this.displayHours.value}`
-        : this.displayHours.value;
-        this.displayMinutes.value = MAX_MINUTES_VALUE;
+        if(this.displayHours.value > 0){   this.displayHours.value --;
+            this.displayHours.value < 10
+            ? this.displayHours.value = `0${this.displayHours.value}`
+            : this.displayHours.value;
+            this.displayMinutes.value = MAX_MINUTES_VALUE;
+        } else {
+            this.displayMinutes.value = '00';
+            this.displayHours.value = '00';
+        }
     }
-  
     },1000);
-    interval = indexInterval;
+}
+
+ringAlarm(){
+    this.alarm.classList.remove('button__alarm--is-active');
+    this.alarmSound.play();
+}
+
+restartTimer(){
+    this.alarm.classList.add('button__alarm--is-active');
+    this.alarmSound.pause();
 }
 
 
@@ -124,20 +145,14 @@ if(isEditable === true){
 checkValues(){
 this.displayHours.value > MAX_HOURS_VALUE
 ? this.displayHours.value = MAX_HOURS_VALUE
-: this.displayHours.value < 10 
-? this.displayHours.value = `0${this.displayHours.value}`
 : this.displayHours.value;
 
 this.displayMinutes.value > MAX_MINUTES_VALUE
 ? this.displayMinutes.value = MAX_MINUTES_VALUE +1
-: this.displayMinutes.value < 10
-? this.displayMinutes.value = `0${this.displayMinutes.value}`
 : this.displayMinutes.value;
 
 this.displaySeconds.value > MAX_SECONDS_VALUE
 ? this.displaySeconds.value = MAX_SECONDS_VALUE +1
-: this.displaySeconds.value < 10
-? this.displaySeconds.value = `0${this.displaySeconds.value}`
 : this.displaySeconds.value;
 
 
