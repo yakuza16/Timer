@@ -49,10 +49,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+   
 }
 
 .timer-input__input {
-    /* display: block; */
     width: 19rem;
     height: 19rem;
     text-align: center;
@@ -70,6 +70,7 @@ body {
 .timer-input__label {
     margin: 1.8rem 0 5rem 0;
     font-size: 2.4rem;
+    cursor: pointer;
 }
 
 .button {
@@ -81,12 +82,26 @@ body {
 }
 
 .button__edit {
-    background-image: url('/assets/done.svg');
-fill: white;
+    background-image: url('/assets/done.svg')
+}
+
+
+.button__edit--is-edit {
+    background-image: url('/assets/edit.svg')
 }
 
 .button__stop {
     background-image: url('/assets/play.svg');
+}
+
+.button__stop:disabled {
+    opacity: .4;
+    cursor: initial;
+}
+
+.button--is-stop {
+    background-image: url('/assets/pause.svg');
+    background-size: 100%;
 }
 
 .button__refresh {
