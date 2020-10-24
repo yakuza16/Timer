@@ -12,7 +12,6 @@ const {hoursInputId,minutesInputId,secondsInputId,editBtnId,playStopBtnId,refres
 
 let isEditable = true;
 let isTimerOn = false;
-
 const MAX_HOURS_VALUE = 99;
 const MAX_MINUTES_VALUE = 60;
 const MAX_SECONDS_VALUE = 60;
@@ -31,7 +30,7 @@ this.alarm = null;
 
 initialize(){
     this.bindToElements();
-    this.optionPlay.setAttribute('disabled', true);
+    this.optionPlay.setAttribute('disabled', true)
     this.addListeners();
 }
 
@@ -51,34 +50,30 @@ this.optionPlay.addEventListener('click', ()=>this.startTimer());
 }
 
 setTimer(){
-    if(isTimerOn === true && isEditable === false){ 
-    this.optionPlay.classList.add('button--is-stop');
-    isTimerOn = false;
-  
-}
-   
     this.checkValues();
-    this.onOffInputs(isEditable)
+    this.onOffInputs(isEditable, isTimerOn)
     isEditable = !isEditable;
-    this.optionPlay.removeAttribute('disabled');
-    
+    if(isEditable === false && isTimerOn === false){
+        this.optionPlay.removeAttribute('disabled')
+    } else if(isEditable === true){
+        isTimerOn = false;
+        this.optionPlay.classList.remove('button--is-stop');
+        this.optionPlay.setAttribute('disabled', true)
+    }
 }
 
 startTimer(){
     this.optionPlay.classList.toggle('button--is-stop');
-    isTimerOn = true;
-    
+    isTimerOn = !isTimerOn;
+  
 }
 
-onOffInputs(isEditable, isTimerOn){
+onOffInputs(isEditable){
     const inputs = [this.displayHours,this.displayMinutes,this.displaySeconds];
-
-if(isEditable === true && !isTimerOn){
+if(isEditable === true){
     inputs.forEach(input => input.setAttribute('disabled', true))
     this.toggleEditIcon();
-     this.optionPlay.setAttribute('disabled', true);
-    
-} else if(!isEditable){
+} else if(isEditable === false){
     inputs.forEach(input => input.removeAttribute('disabled'))
     this.toggleEditIcon();
 }
@@ -100,14 +95,7 @@ this.displaySeconds.value > MAX_SECONDS_VALUE
 
 toggleEditIcon(){
     this.optionEdit.classList.toggle('button__edit--is-edit');
-
 }
-
-
-
-
-
-
 
 }
 
