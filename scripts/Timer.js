@@ -1,12 +1,20 @@
+const cssClassModifiers = {
+   alarmModifier: 'button__alarm--is-active',
+   editModifier: 'button__edit--is-edit',
+   stopModifier: 'button--is-stop',
+};
+
+const {alarmModifier,editModifier,stopModifier} = cssClassModifiers;
+
 const domElementsId = {
+alarmBtnId: 'alarm',
+editBtnId: 'edit',
 hoursInputId: 'hours',
 minutesInputId: 'minutes',
-secondsInputId: 'seconds',
-editBtnId: 'edit',
 playStopBtnId: 'play',
 refreshBtnId: 'refresh',
-alarmBtnId: 'alarm',
-}
+secondsInputId: 'seconds',
+};
 
 const {hoursInputId,minutesInputId,secondsInputId,editBtnId,playStopBtnId,refreshBtnId,alarmBtnId} = domElementsId;
 
@@ -36,7 +44,7 @@ this.choosenSeconds = null;
 
 initialize(){
     this.bindToElements();
-    this.optionPlay.setAttribute('disabled', true)
+    this.disableButton(this.optionPlay)
     this.addListeners();
 };
 
@@ -62,17 +70,17 @@ setTimer(){
     this.onOffInputs(isEditable, isTimerOn)
     isEditable = !isEditable;
     if(isEditable === false && isTimerOn === false){
-        this.optionPlay.removeAttribute('disabled')
+        this.enableButton(this.optionPlay);
     } else if(isEditable === true){
         isTimerOn = false;
         clearInterval(interval);
-        this.optionPlay.classList.remove('button--is-stop');
-        this.optionPlay.setAttribute('disabled', true)
+        this.removeCssModifier(this.optionPlay,stopModifier);
+        this.disableButton(this.optionPlay);
     }
 };
 
 startTimer(){
-    this.optionPlay.classList.toggle('button--is-stop');
+    this.toggleCssModifier(this.optionPlay,stopModifier);
     isTimerOn = !isTimerOn;
 
     if(isTimerOn === true){
@@ -119,31 +127,35 @@ count(){
 };
 
 ringAlarm(){
-    this.optionRefresh.setAttribute('disabled', true)
-    this.alarm.classList.remove('button__alarm--is-active');
+    this.disableButton(this.optionRefresh)
+    this.disableButton(this.optionEdit);
+    this.disableButton(this.optionPlay);
+    this.removeCssModifier(this.alarm,alarmModifier);
     this.alarmSound.play();
 };
 
 restartTimer(){
     isTimerOn = false;
-    this.optionPlay.classList.remove('button--is-stop');
-    this.optionPlay.setAttribute('disabled', true);
-    this.optionRefresh.removeAttribute('disabled')
+    this.removeCssModifier(this.optionPlay,stopModifier);
+    this.disableButton(this.optionPlay);
+    this.enableButton(this.optionRefresh);
+    this.enableButton(this.optionEdit);
+
     this.choosenHours = null;
     this.choosenMinutes = null;
     this.choosenSeconds = null;
-    this.alarm.classList.add('button__alarm--is-active');
+    this.alarm.classList.add(alarmModifier);
     this.alarmSound.pause();
 };
 
 onOffInputs(isEditable){
     const inputs = [this.displayHours,this.displayMinutes,this.displaySeconds];
     if(isEditable === true){
-    inputs.forEach(input => input.setAttribute('disabled', true))
-    this.toggleEditIcon();
+    inputs.forEach(input => this.disableButton(input))
+    this.toggleCssModifier(this.optionEdit,editModifier);
     } else if(isEditable === false){
-    inputs.forEach(input => input.removeAttribute('disabled'))
-    this.toggleEditIcon();
+    inputs.forEach(input => this.enableButton(input))
+    this.toggleCssModifier(this.optionEdit,editModifier);
     }
 };
 
@@ -171,9 +183,21 @@ refreshTimer(){
     this.displaySeconds.value = this.choosenSeconds;
 };
 
-toggleEditIcon(){
-    this.optionEdit.classList.toggle('button__edit--is-edit');
+disableButton(element){
+element.setAttribute('disabled', true);
+}
+
+enableButton(element){
+    element.removeAttribute('disabled');
+}
+
+toggleCssModifier(element,cssModifier){
+    element.classList.toggle(cssModifier)
 };
+
+removeCssModifier(element,cssModifier){
+    element.classList.remove(cssModifier)
+}
 
 }
 

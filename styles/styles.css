@@ -87,11 +87,6 @@ body {
     background-image: url('../assets/play.svg');
 }
 
-.button__stop:disabled {
-    opacity: .4;
-    cursor: initial;
-}
-
 .button--is-stop {
     background-image: url('../assets/pause.svg');
     background-size: 100%;
@@ -101,11 +96,10 @@ body {
     background-image: url('../assets/refresh.svg');
 }
 
-.button__refresh:disabled {
+.button__refresh:disabled, .button__stop:disabled, .button__edit:disabled {
     opacity: .4;
     cursor: initial;
 }
-
 
 .button__alarm {
     transition: transform .3s;
@@ -154,5 +148,4 @@ body {
         width: 9rem;
         height: 9rem;
     }
-
 }
