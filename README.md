@@ -1,4 +1,4 @@
-# [Timer](https://yakuza16.github.io/timer/ "Timer")
+# [Timer](https://yakuza16.github.io/Timer/ "Timer")
 
 ![](https://cdn3.iconfinder.com/data/icons/minimalisticons/28/notification-bell-2-256.png)
 
