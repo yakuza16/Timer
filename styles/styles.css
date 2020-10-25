@@ -76,15 +76,15 @@ body {
 }
 
 .button__edit {
-    background-image: url('/assets/done.svg')
+    background-image: url('../assets/done.svg')
 }
 
 .button__edit--is-edit {
-    background-image: url('/assets/edit.svg')
+    background-image: url('../assets/edit.svg')
 }
 
 .button__stop {
-    background-image: url('/assets/play.svg');
+    background-image: url('../assets/play.svg');
 }
 
 .button__stop:disabled {
@@ -93,12 +93,12 @@ body {
 }
 
 .button--is-stop {
-    background-image: url('/assets/pause.svg');
+    background-image: url('../assets/pause.svg');
     background-size: 100%;
 }
 
 .button__refresh {
-    background-image: url('/assets/refresh.svg');
+    background-image: url('../assets/refresh.svg');
 }
 
 .button__refresh:disabled {
