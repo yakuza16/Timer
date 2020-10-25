@@ -13,8 +13,9 @@ const {hoursInputId,minutesInputId,secondsInputId,editBtnId,playStopBtnId,refres
 let isEditable = true;
 let isTimerOn = false;
 const MAX_HOURS_VALUE = 99;
-const MAX_MINUTES_VALUE = 59;
+const MAX_MINUTES_VALUE = 60;
 const MAX_SECONDS_VALUE = 59;
+const PLUS_ONE_SECOND = 1;
 
 let interval;
 
@@ -27,19 +28,17 @@ this.optionEdit = null;
 this.optionPlay = null;
 this.optionRefresh = null;
 this.alarm = null;
-this.alarmSound = new Audio('/assets/clockRing.mp3')
-
+this.alarmSound = new Audio('./assets/clockRing.mp3');
 this.choosenHours = null;
 this.choosenMinutes = null;
 this.choosenSeconds = null;
-
-}
+};
 
 initialize(){
     this.bindToElements();
     this.optionPlay.setAttribute('disabled', true)
     this.addListeners();
-}
+};
 
 bindToElements(){
     this.displayHours = document.getElementById(hoursInputId);
@@ -49,14 +48,14 @@ bindToElements(){
     this.optionPlay = document.getElementById(playStopBtnId);
     this.optionRefresh = document.getElementById(refreshBtnId);
     this.alarm = document.getElementById(alarmBtnId)
-}
+};
 
 addListeners(){
 this.optionEdit.addEventListener('click',()=> this.setTimer());
 this.optionPlay.addEventListener('click', ()=>this.startTimer());
 this.optionRefresh.addEventListener('click', ()=>this.refreshTimer());
 this.alarm.addEventListener('click', ()=>this.restartTimer());
-}
+};
 
 setTimer(){
     this.checkValues();
@@ -70,7 +69,7 @@ setTimer(){
         this.optionPlay.classList.remove('button--is-stop');
         this.optionPlay.setAttribute('disabled', true)
     }
-}
+};
 
 startTimer(){
     this.optionPlay.classList.toggle('button--is-stop');
@@ -81,7 +80,7 @@ startTimer(){
     } else if(isTimerOn === false){
         clearInterval(interval)
     }
-}
+};
 
 count(){
     interval = setInterval(()=>{
@@ -98,12 +97,12 @@ count(){
             :
             this.displayMinutes.value;
             this.displaySeconds.value = MAX_SECONDS_VALUE;
-        } else {
+            } else if (this.displaySeconds.value <= 0 && this.displayHours.value <=0) {
             this.displaySeconds.value = '00';
             clearInterval(interval);
             this.ringAlarm();
         }
-    }
+    };
 
     if(this.displayMinutes.value <= 0){
         if(this.displayHours.value > 0){   this.displayHours.value --;
@@ -117,61 +116,65 @@ count(){
         }
     }
     },1000);
-}
+};
 
 ringAlarm(){
+    this.optionRefresh.setAttribute('disabled', true)
     this.alarm.classList.remove('button__alarm--is-active');
     this.alarmSound.play();
-}
+};
 
 restartTimer(){
+    isTimerOn = false;
+    this.optionPlay.classList.remove('button--is-stop');
+    this.optionPlay.setAttribute('disabled', true);
+    this.optionRefresh.removeAttribute('disabled')
+    this.choosenHours = null;
+    this.choosenMinutes = null;
+    this.choosenSeconds = null;
     this.alarm.classList.add('button__alarm--is-active');
     this.alarmSound.pause();
-}
-
-
+};
 
 onOffInputs(isEditable){
     const inputs = [this.displayHours,this.displayMinutes,this.displaySeconds];
-if(isEditable === true){
+    if(isEditable === true){
     inputs.forEach(input => input.setAttribute('disabled', true))
     this.toggleEditIcon();
-} else if(isEditable === false){
+    } else if(isEditable === false){
     inputs.forEach(input => input.removeAttribute('disabled'))
     this.toggleEditIcon();
-}
-}
+    }
+};
 
 checkValues(){
-this.displayHours.value > MAX_HOURS_VALUE
-? this.displayHours.value = MAX_HOURS_VALUE
-: this.displayHours.value;
+    this.displayHours.value > MAX_HOURS_VALUE
+    ? this.displayHours.value = MAX_HOURS_VALUE
+    : this.displayHours.value;
 
-this.displayMinutes.value > MAX_MINUTES_VALUE
-? this.displayMinutes.value = MAX_MINUTES_VALUE +1
-: this.displayMinutes.value;
+    this.displayMinutes.value > MAX_MINUTES_VALUE
+    ? this.displayMinutes.value = MAX_MINUTES_VALUE
+    : this.displayMinutes.value;
 
-this.displaySeconds.value > MAX_SECONDS_VALUE
-? this.displaySeconds.value = MAX_SECONDS_VALUE +1
-: this.displaySeconds.value;
+    this.displaySeconds.value > MAX_SECONDS_VALUE
+    ? this.displaySeconds.value = MAX_SECONDS_VALUE + PLUS_ONE_SECOND
+    : this.displaySeconds.value;
 
-
-this.choosenHours = this.displayHours.value;
-this.choosenMinutes = this.displayMinutes.value;
-this.choosenSeconds = this.displaySeconds.value;
-}
+    this.choosenHours = this.displayHours.value;
+    this.choosenMinutes = this.displayMinutes.value;
+    this.choosenSeconds = this.displaySeconds.value;
+};
 
 refreshTimer(){
- this.displayHours.value = this.choosenHours ;
-this.displayMinutes.value = this.choosenMinutes;
-this.displaySeconds.value = this.choosenSeconds;
-}
+    this.displayHours.value = this.choosenHours ;
+    this.displayMinutes.value = this.choosenMinutes;
+    this.displaySeconds.value = this.choosenSeconds;
+};
 
 toggleEditIcon(){
     this.optionEdit.classList.toggle('button__edit--is-edit');
-}
+};
 
 }
-
 
 export const timer = new Timer();
