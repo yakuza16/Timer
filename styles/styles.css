@@ -1,151 +1,163 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 /* font-family: 'Press Start 2P', cursive; */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
 :root {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    font-family: 'Press Start 2P';
-    background-color: #7c8284;
-    color: rgb(0, 0, 0);
+  width: 100vw;
+  height: 100vh;
+  font-family: "Press Start 2P";
+  background-color: #7c8284;
+  color: rgb(0, 0, 0);
 }
 
 .wrapper {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    width: 80%;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .timer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .timer__heading {
-    font-size: 5rem;
-    user-select: none;
+  font-size: 5rem;
+  user-select: none;
 }
 
 .inputsWrapper {
-    display: flex;
+  display: flex;
 }
 
 .timer-input {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .timer-input__input {
-    width: 9.2rem;
-    height: 9.2rem;
-    text-align: center;
-    font-size: 2rem;
-    background-color: #ced1d1;
-    border: .2rem solid #7c8284;
-    color: rgb(0, 0, 0);
+  width: 9.2rem;
+  height: 9.2rem;
+  text-align: center;
+  font-size: 2rem;
+  background-color: #ced1d1;
+  border: 0.2rem solid #7c8284;
+  color: rgb(0, 0, 0);
+  outline: none;
 }
 
 .timer-input__label {
-    margin: 1.8rem 0 5rem 0;
-    font-size: 1rem;
-    cursor: pointer;
+  margin: 1.8rem 0 5rem 0;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .button {
-    width: 5rem;
-    height: 5rem;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+  border: 0.4rem solid black;
 }
 
 .button__edit {
-    background-image: url('../assets/done.svg')
+  background-image: url("../assets/done.svg");
 }
 
 .button__edit--is-edit {
-    background-image: url('../assets/edit.svg')
+  background-image: url("../assets/edit.svg");
 }
 
 .button__stop {
-    background-image: url('../assets/play.svg');
+  background-image: url("../assets/play.svg");
 }
 
 .button--is-stop {
-    background-image: url('../assets/pause.svg');
-    background-size: 100%;
+  background-image: url("../assets/pause.svg");
+  background-size: 100%;
 }
 
 .button__refresh {
-    background-image: url('../assets/refresh.svg');
+  background-image: url("../assets/refresh.svg");
 }
 
-.button__refresh:disabled, .button__stop:disabled, .button__edit:disabled {
-    opacity: .4;
-    cursor: initial;
+.button__refresh:disabled,
+.button__stop:disabled,
+.button__edit:disabled {
+  opacity: 0.4;
+  cursor: initial;
 }
 
 .button__alarm {
-    transition: transform .3s;
+  transition: transform 0.3s;
 }
 
 .button__alarm:hover {
-    transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 .button__alarm-icon {
-    fill: #523d42;
-    animation: alarm .2s infinite;
+  fill: #523d42;
+  animation: alarm 0.2s infinite;
 }
 
 .button__alarm-icon:hover {
-    fill: #7ffabf;
-    animation: paused;
+  fill: #7ffabf;
+  animation: paused;
 }
 
 .button__alarm--is-active {
-    visibility: hidden;
-    cursor: initial;
+  visibility: hidden;
+  cursor: initial;
 }
 
 @keyframes alarm {
-    0% {transform: translateX(-2px);}
-    100% {transform: translateX(2px);}
+  0% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(2px);
+  }
 }
 
-@media(min-width:768px){
-    .timer__heading {
-        font-size: 10rem;
-    }
+@media (min-width: 768px) {
+  .timer__heading {
+    font-size: 10rem;
+  }
 
-    .timer-input__input {
-        width: 19rem;
-        height: 19rem;
-        font-size: 7rem;
-    }
+  .timer-input__input {
+    width: 19rem;
+    height: 19rem;
+    font-size: 7rem;
+  }
 
-    .timer-input__label {
-        font-size: 2.3rem;
-    }
+  .timer-input__label {
+    font-size: 2.3rem;
+  }
 
-    .button {
-        width: 9rem;
-        height: 9rem;
-    }
+  .button {
+    width: 9rem;
+    height: 9rem;
+  }
 }
