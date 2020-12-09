@@ -8,5 +8,5 @@
 
 ------------
 
-Timer that allows you to choose how many hours, minutes and seconds to count. After the time has counted down, an alarm sounds that must be turned off. After that, you can set the time again.
+Timer that allows you to choose how many hours, minutes and seconds to count. After the time has counted down, an alarm sounds that must be turned off. After that, you can set the time again. It also uses local storage to store the time, so when you reload the page there will be set time from the moment before the reloading the page.
 
