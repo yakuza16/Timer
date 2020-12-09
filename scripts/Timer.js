@@ -53,6 +53,7 @@ class Timer {
   initialize() {
     this.bindToElements();
     this.displaySeconds.focus();
+    this.setTimeFromLocalStorage();
     this.disableButton(this.optionPlay);
     this.addListeners();
   }
@@ -102,6 +103,11 @@ class Timer {
   count() {
     interval = setInterval(() => {
       this.displaySeconds.value--;
+      this.storePickedTime(
+        this.displayHours.value,
+        this.displayMinutes.value,
+        this.displaySeconds.value
+      );
       this.displaySeconds.value < 10
         ? (this.displaySeconds.value = `0${this.displaySeconds.value}`)
         : this.displaySeconds.value;
@@ -191,12 +197,31 @@ class Timer {
     this.choosenHours = this.displayHours.value;
     this.choosenMinutes = this.displayMinutes.value;
     this.choosenSeconds = this.displaySeconds.value;
+
+    this.storePickedTime(
+      this.choosenHours,
+      this.choosenMinutes,
+      this.choosenSeconds
+    );
+  }
+
+  storePickedTime(pickedHours, pickedMinutes, pickedSeconds) {
+    localStorage.setItem("storageHours", pickedHours);
+    localStorage.setItem("storageMinutes", pickedMinutes);
+    localStorage.setItem("storageSeconds", pickedSeconds);
+  }
+
+  setTimeFromLocalStorage() {
+    this.displayHours.value = Number(localStorage.getItem("storageHours"));
+    this.displayMinutes.value = Number(localStorage.getItem("storageMinutes"));
+    this.displaySeconds.value = Number(localStorage.getItem("storageSeconds"));
   }
 
   refreshTimer() {
     this.displayHours.value = this.choosenHours;
     this.displayMinutes.value = this.choosenMinutes;
     this.displaySeconds.value = this.choosenSeconds;
+    localStorage.clear();
   }
 
   disableButton(element) {
